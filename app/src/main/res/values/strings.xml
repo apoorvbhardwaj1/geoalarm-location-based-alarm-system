@@ -1,0 +1,6 @@
+<resources>
+    <string name="app_name">Mps</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="formatted_place_data" />
+
+</resources>
