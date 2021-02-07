@@ -38,7 +38,6 @@ import com.google.android.gms.maps.model.MarkerOptions;
 
 public class MapsActivity extends FragmentActivity implements GoogleMap.OnMapClickListener, OnMapReadyCallback, GoogleApiClient.ConnectionCallbacks, GoogleApiClient.OnConnectionFailedListener, LocationListener {
 
-
     private GoogleMap mMap;
     TextView latitudeText;
     TextView longitudeText;
@@ -88,16 +87,6 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMapCli
 
     }
 
-
-
-
-
-
-
-
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -109,77 +98,9 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMapCli
         mapFragment.setRetainInstance(true);
 
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
         latitudeText = (TextView) findViewById(R.id.tvLatitude);
         longitudeText = (TextView) findViewById(R.id.tvLongitude);
         settingButton = (Button) findViewById(R.id.sbutton);
-
 
 
         mediaPlayer = MediaPlayer.create(this, RingtoneManager.getValidRingtoneUri(this));
@@ -195,8 +116,6 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMapCli
         locationRequest.setInterval(10 * 1000);
         locationRequest.setFastestInterval(15 * 1000);
         locationRequest.setPriority(LocationRequest.PRIORITY_BALANCED_POWER_ACCURACY);
-
-
 
 
         settingButton.setOnClickListener(new View.OnClickListener() {
@@ -216,13 +135,8 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMapCli
         });
 
 
-
-
-
-
-
-            final PlaceAutocompleteFragment places = (PlaceAutocompleteFragment)
-                getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
+        final PlaceAutocompleteFragment places = (PlaceAutocompleteFragment) getFragmentManager().findFragmentById(R.id.place_autocomplete_fragment);
+        
         places.setOnPlaceSelectedListener(new PlaceSelectionListener() {
             @Override
             public void onPlaceSelected(Place place) {
@@ -231,17 +145,10 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMapCli
                 Toast.makeText(getApplicationContext(), place.getName(), Toast.LENGTH_SHORT).show();
                 mMap.animateCamera(CameraUpdateFactory.newLatLngZoom(place.getLatLng(), 12));
                 mMap.clear();               //Clears the map before adding another Marker
-                MarkerOptions marker = new MarkerOptions().position(
-                        new LatLng(place.getLatLng().latitude, place.getLatLng().longitude)).title("Destination");
+                MarkerOptions marker = new MarkerOptions().position(new LatLng(place.getLatLng().latitude, place.getLatLng().longitude)).title("Destination");
                 mMap.addMarker(marker);
 
                 drawCircle(marker.getPosition());
-
-
-
-
-
-
             }
 
 
@@ -249,18 +156,14 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMapCli
             public void onError(Status status) {
 
                 Toast.makeText(getApplicationContext(), status.toString(), Toast.LENGTH_SHORT).show();
-
             }
         });
-
-
     }
 
 
     @Override
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
-
 
 
         if (ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED && ActivityCompat.checkSelfPermission(this, Manifest.permission.ACCESS_COARSE_LOCATION) != PackageManager.PERMISSION_GRANTED) {
@@ -282,14 +185,6 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMapCli
         }
         mMap.setMyLocationEnabled(true);
         mMap.setOnMapClickListener((GoogleMap.OnMapClickListener) this);
-
-
-
-
-
-
-
-
     }
 
 
@@ -297,7 +192,6 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMapCli
 
     @Override
     public void onMapClick (LatLng point) {
-
 
         this.point = point;
 
@@ -308,7 +202,6 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMapCli
         mMap.addMarker(marker);
 
     }
-
 
 
 
@@ -343,15 +236,11 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMapCli
                                 dialog.cancel();
                                 mMap.clear();
                                 place = null;
-
-
                             }
                         });
 
                         AlertDialog dialog = alert.create();
                         dialog.show();
-
-
                     }
                 }
             }
@@ -376,8 +265,6 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMapCli
                         AlertDialog.Builder alert = new AlertDialog.Builder(this);
 
 
-
-
                         alert.setCancelable(false).setMessage("You Are Going To Reach Your Destination").setPositiveButton("STOP ALARM                           ", new DialogInterface.OnClickListener() {
                             public void onClick(DialogInterface dialog, int id) {
                                 mediaPlayer.stop();
@@ -386,46 +273,15 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMapCli
                                 dialog.cancel();
                                 mMap.clear();
                                 point = null;
-
-
                             }
                         });
 
                         AlertDialog dialog = alert.create();
                         dialog.show();
-
-
                     }
                 }
             }
-
-
         }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     @Override
@@ -458,46 +314,6 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMapCli
     public void onConnectionFailed(@NonNull ConnectionResult connectionResult) {
 
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
     @Override
@@ -549,17 +365,10 @@ public class MapsActivity extends FragmentActivity implements GoogleMap.OnMapCli
                     Toast.makeText(getApplicationContext(),"This app requires location permission to be granted", Toast.LENGTH_SHORT).show();
                     latitudeText.setText("Latitude : Permission is not granted");
                     longitudeText.setText("Longitude : Permission is not granted");
-
                 }
                 break;
             case MY_PERMISSION_REQUEST_COARSE_LOCATION:
                 break;
-
         }
     }
 }
-
-
-
-
-
